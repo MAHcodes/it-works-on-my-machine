@@ -9,15 +9,17 @@ services:
       MYSQL_DATABASE: MyWordPressDatabaseName
       MYSQL_USER: MyWordPressUser
       MYSQL_PASSWORD: Pa$$5w0rD
+    volumes:
+      ["mysql:/var/lib/mysql"]
   phpmyadmin:
-      image: phpmyadmin/phpmyadmin:latest
-      restart: always
-      environment:
-        PMA_HOST: db
-        PMA_USER: MyWordPressUser
-        PMA_PASSWORD: Pa$$5w0rD
-      ports:
-        - "8080:80"
+    image: phpmyadmin/phpmyadmin:latest
+    restart: always
+    environment:
+      PMA_HOST: db
+      PMA_USER: MyWordPressUser
+      PMA_PASSWORD: Pa$$5w0rD
+    ports:
+      - "8080:80"
   wordpress:
     depends_on:
       - db
